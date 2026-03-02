@@ -1,0 +1,685 @@
+J'ai appris qu'on peut mettre plusieurs images dans une view comme ceci
+
+<View style={styles.container}>
+      <ImageBackground
+        source={require('./assets/wallpapers/wallpaper1.png')}
+        style={styles.background}
+        resizeMode="cover"
+      >
+        <Text style={styles.text}>Bienvenue sur PopFit !</Text>
+
+        <View style={styles.image_container}>
+        <Image
+          style={styles.image}
+          source={require('./assets/wallpapers/logo1.png')}
+        />
+        <Image
+          style={styles.image}
+          source={require('./assets/wallpapers/logo2.png')}
+        />
+        </View>
+
+        <StatusBar style="auto" />
+      </ImageBackground>
+    </View>
+
+    que pour chaque élément on peut avoir un style en particulier par exemple:
+    styles.background
+
+     background: {
+    flex: 1,              // ImageBackground prend tout l'écran
+    justifyContent: 'center',
+    alignItems: 'center', // centre le texte et l'image
+  },
+
+
+
+  # ATTENTION, il faut que j'apprenne surtout à faire les manips seuls, si possible je fais les manips du cours ou bien j'avance sur l'application
+
+  Chaque élément peut avoir un style (vu plus haut) mais notamment on peut scrooler avec ScrollView ce qui permet de faire défiler avec les doigts 
+  mais aussi uri et NON url qui permet de mettre un lien en guise d'image exemple source={{uri: 'https://legacy.reactjs.org/logo-og.png'}}
+
+ Pour faire un bouton, il faut faire ceci:
+
+ <Button 
+      onPress={incremente} 
+      title="+" 
+      color="#841584" 
+      accessibilityLabel="Incrémente la valeur" />
+
+ Contrairement aux autres composantes, il ne peut pas être stylisé directement , donc il faut le placer dans une View
+
+ <View style={styles.buttonContainer}>
+      <Button 
+      onPress={incremente} 
+      title="+" 
+      color="#841584" 
+      accessibilityLabel="Incrémente la valeur" />
+
+      <Text style={styles.display}>{nombre}</Text>
+
+
+      <Button 
+      onPress={decremente} 
+      title="-" 
+      color="#651bb9ff" 
+      accessibilityLabel="Décrémente la valeur" />
+
+      <Button 
+      onPress={refresh} 
+      title="Rafraichir" 
+      color="#82ccbeff" 
+      accessibilityLabel="Réinitialise la valeur" />
+      </View>
+
+      On peut créer une fonction, une variable et l'utiliser comme ceci:
+
+      #variable
+      const [nombre, setNombre]=useState(0);
+
+      #fonction d'incrémentation
+      const incremente = ()=>{
+        setNombre(nombre+1) ;
+      }
+
+      #fonction de décrémentation
+      const decremente = ()=>{
+        setNombre(nombre-1) ;
+      }
+
+      #fonction de rafraichissement
+      const refresh = ()=>{
+        setNombre(0) ;
+      }
+
+      Egalement pour que tout fonctionne bien, la fonction et la variable se doivent d'être à l'intérieur de export App() {}
+  
+## React Navigateur
+J'ai appris aujourd'hui que pour créer des liens entre les pages, il faut plusieurs choses:
+
+Il faut d'abord installer React Navigation:
+npm install @react-navigation/native
+
+puis les dépendances:
+npx expo install react-native-screens react-native-safe-area-context
+
+et enfin Stack Navigator (afin d'avoir une navigation classique "page suivante / page précédente"):
+npm install @react-navigation/native-stack
+
+Après on doit créer un Stack Navigator où il y aura la sélection des pages qui sont 
+désormais dans un dossier screens, le fichier App.js fera office de carrefour entre les pages.
+Dans le fichier App.js, 
+
+On importe NavigationContainer et createStackNavigator
+afin d'utiliser la navigation et la création d'un StackNavigator 
+afin de stocker les pages et pouvoir faire un répertoire de navigation
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+On importe également chaque page comme ceci:
+
+// Import de tes écrans
+
+//Selection des Personnages
+import Characters_Select from './screens/characters_select';
+
+on créer una variable Stack qui contiendra le STACK
+const Stack = createStackNavigator();
+
+Egalement à l'intérieur de celui ci on peut mettre des options pour définir un chemin initial
+
+initialRouteName="characters_select"
+
+ou même un moyen de cacher le header s'il est trop contraignant:
+
+screenOptions={{ headerShown: false, // <-- supprime le header pour tous les écrans
+}}>
+
+grâce au StackNavigator, on peut mettre des StackScreens pour définir chaque page 
+avec un nom et un composant et si possible une option
+ <Stack.Screen 
+    name="characters_select"
+    component={Characters_Select}
+    options={{ title: "Sélection du Programme" }}
+/>
+
+On peut évidemment en mettre autant que l'on souhaite
+
+Avec tout ça on pourra naviguer dans l'application sans problème.
+Dés qu'on arrive sur l'application avec Expo Go, ce dernier ira sur App.js automatiquement
+(qui au passage est immuable et non modifiable, on passera forcément par App.js
+c'est pour ça qu'il faut bien le configurer et faire attention aux chemins)
+
+Choses importantes pour que tout fonctionne:
+-Vérifier les installations et dépendances
+-Vérifier les chemins (faire attention aux ./ et ../)
+-Bien faire attention aux noms donnés aux fichiers lors des appels de fonction
+
+-----------------------------------------------------------------------------------------------------------
+
+Mémo Firebase (Simple & Clair)
+
+1. Qu’est‑ce que Firebase ?
+
+Firebase est une plateforme de Google qui fournit : - Authentification
+(Google, email/mot de passe, etc.) - Bases de données : Firestore
+(NoSQL) - Stockage (images) - Hébergement - Analytics
+
+Il fonctionne parfaitement avec React Native + Expo sans configuration
+native compliquée.
+
+------------------------------------------------------------------------
+
+2. Créer un projet Firebase
+
+1.  Va sur https://console.firebase.google.com
+2.  Clique Créer un projet
+3.  Donne un nom (ex : “DBZ App”)
+4.  Valide les étapes
+
+------------------------------------------------------------------------
+
+3. Ajouter Firestore (la base de données)
+
+1.  Dans Firebase → Menu Build
+2.  Choisis Firestore Database
+3.  Clique Créer base de données
+4.  Choisis Mode Test pour le développement
+
+Firestore = base NoSQL → pas de tables, mais collections → documents.
+
+Exemple structure : - users - ZAEf5d78g (document) - name: “Goku” -
+level: 42
+
+------------------------------------------------------------------------
+
+4. Connecter Firebase à ton projet Expo
+
+Installe Firebase :
+
+    expo install firebase
+
+Crée firebase.js à la racine :
+
+    import { initializeApp } from "firebase/app";
+    import { getFirestore } from "firebase/firestore";
+    import { getAuth } from "firebase/auth";
+
+    const firebaseConfig = {
+      apiKey: "API_KEY",
+      authDomain: "PROJECT_ID.firebaseapp.com",
+      projectId: "PROJECT_ID",
+      storageBucket: "PROJECT_ID.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID",
+    };
+
+    const app = initializeApp(firebaseConfig);
+
+    export const db = getFirestore(app);
+    export const auth = getAuth(app);
+
+------------------------------------------------------------------------
+
+5. CRUD Firestore (exemples)
+
+➤ Ajouter (INSERT)
+
+    import { addDoc, collection } from "firebase/firestore";
+    import { db } from "../firebase";
+
+    await addDoc(collection(db, "users"), {
+      name: "Goku",
+      level: 9000
+    });
+
+➤ Lire (SELECT)
+
+    import { getDocs, collection } from "firebase/firestore";
+
+    const users = await getDocs(collection(db, "users"));
+    users.forEach(doc => console.log(doc.id, doc.data()));
+
+➤ Modifier (UPDATE)
+
+    import { updateDoc, doc } from "firebase/firestore";
+
+    await updateDoc(doc(db, "users", "ID_DU_DOC"), {
+      level: 9500
+    });
+
+➤ Supprimer (DELETE)
+
+    import { deleteDoc, doc } from "firebase/firestore";
+
+    await deleteDoc(doc(db, "users", "ID_DU_DOC"));
+
+------------------------------------------------------------------------
+
+6. Activer la connexion Google
+
+1.  Firebase → Build → Authentication
+2.  Onglet Méthode de connexion
+3.  Active Google
+4.  Ajoute un e‑mail de support
+
+------------------------------------------------------------------------
+
+7. Connexion Google avec Expo
+
+Installe :
+
+    expo install expo-auth-session
+
+Créer googleAuth.js :
+
+    import * as Google from "expo-auth-session/providers/google";
+    import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+    import { auth } from "./firebase";
+
+    export function useGoogleLogin() {
+      const [request, response, promptAsync] = Google.useAuthRequest({
+        expoClientId: "TON_ID_EXPO",
+        androidClientId: "TON_ID_ANDROID",
+        iosClientId: "TON_ID_IOS",
+        webClientId: "TON_ID_WEB",
+      });
+
+      async function login() {
+        const result = await promptAsync();
+        if (result.type === "success") {
+          const credential = GoogleAuthProvider.credential(result.params.id_token);
+          return await signInWithCredential(auth, credential);
+        }
+      }
+
+      return { login };
+    }
+
+Exemple bouton :
+
+    <Button title="Connexion Google" onPress={login} />
+
+------------------------------------------------------------------------
+
+Résumé rapide
+
+-   Firebase = Auth + Base NoSQL + Services Google
+-   Firestore = collections / documents
+-   CRUD simple à utiliser
+-   Auth Google activable en 2 clics
+-   Expo + Firebase = 100% compatible sans configuration native
+
+
+pour actualiser les paquets on fait 
+
+npm i
+
+
+pour rectifier les installations foireuses on fait
+npm install --force
+npm audit fix --force
+
+-----------------------------------------------------------------------------------------------------------
+
+Ionicons (icônes React Native)
+
+🔹 À quoi ça sert ? Ionicons te permet d’ajouter des icônes vectorielles dans ton app React Native (boutons, menus, retours, paramètres...).
+
+🔹 Installation Pour Expo :
+
+npx expo install @expo/vector-icons
+
+🔹 Importation
+
+import { Ionicons } from '@expo/vector-icons';
+
+🔹 Exemple simple : icône menu
+
+<Ionicons name="menu" size={32} color="white" />
+
+name : le nom de l’icône (menu, home, person, settings...)
+
+size : taille en pixels
+
+color : couleur
+
+🔹 Exemple cliquable :
+
+<Ionicons
+  name="menu"
+  size={32}
+  color="white"
+  onPress={openDrawer}
+/>
+
+🔹 Astuces
+
+Ionicons est un composant React, tu peux cliquer dessus avec onPress.
+
+Toutes les icônes : https://icons.expo.fyi/
+
+-----------------------------------------------------------------------------------------------------------
+
+DrawerLayoutAndroid (menu latéral Android)
+
+🔹 À quoi ça sert ?
+
+- Menu latéral qui s’ouvre depuis la gauche ou droite
+
+- S’ouvre via glissement ou bouton
+
+🔹 Particularités
+
+- Android uniquement
+
+- Doit envelopper la partie visible de l'app
+
+- Contrôlé via drawerRef
+
+🔹 Import
+
+import { DrawerLayoutAndroid } from 'react-native';
+import { useRef } from 'react';
+
+🔹 Créer une référence
+
+const drawerRef = useRef(null);
+
+🔹 Ouvrir / fermer
+
+drawerRef.current.openDrawer();
+drawerRef.current.closeDrawer();
+
+🔹 Exemple contenu du drawer
+
+const drawerContent = (
+  <View style={{ flex: 1, backgroundColor: "#222", padding: 20 }}>
+    <Text style={{ color: "#fff", fontSize: 25 }}>Menu PopFit</Text>
+    <Text style={{ color: "#fff", marginTop: 20 }}>Profil</Text>
+    <Text style={{ color: "#fff", marginTop: 10 }}>Progression</Text>
+    <Text style={{ color: "#fff", marginTop: 10 }}>Paramètres</Text>
+    <Text style={{ color: "#fff", marginTop: 10 }}>Déconnexion</Text>
+  </View>
+);
+
+🔹 Placer le drawer autour de ta navigation
+
+<DrawerLayoutAndroid
+  ref={drawerRef}
+  drawerWidth={280}
+  drawerPosition="left"
+  renderNavigationView={() => drawerContent}
+>
+  {/* App ou StackNavigator */}
+</DrawerLayoutAndroid>
+
+🎯 3. Bouton Hamburger fixe
+
+🔹 Objectif
+
+- Toujours visible même quand drawer ouvert
+
+- Clickable pour ouvrir/fermer le drawer
+
+- Au-dessus de tout (Stack, contenu drawer)
+
+🔹 Code recommandé
+
+<TouchableOpacity
+  onPress={() => drawerRef.current.openDrawer()}
+  style={{
+    position: "absolute",
+    top: 40,
+    left: 20,
+    zIndex: 999,
+    backgroundColor: "transparent",
+  }}
+>
+  <Ionicons name="menu" size={35} color="white" />
+</TouchableOpacity>
+
+🔹 Subtilités
+
+- position: absolute → place le bouton à un endroit fixe
+
+- zIndex élevé → bouton au-dessus du drawer et StackNavigator
+
+- background transparent → ne cache pas le contenu dessous
+
+- onPress → ouvre ou ferme le drawer
+
+🔹 Cas spécifiques
+
+- Disparaît derrière le drawer → utiliser zIndex élevé
+
+- Même bouton sur tous les écrans → placer hors StackNavigator
+
+- Drawer Android uniquement → iOS utiliser createDrawerNavigator
+
+- Glisser depuis le bord → natif, bouton pour UX
+
+- Contenu du drawer → fond opaque pour lisibilité
+
+🧠 Résumé ultra-court
+
+- Ionicons = icônes faciles, stylables et cliquables
+
+- DrawerLayoutAndroid = menu latéral contrôlé via drawerRef
+
+- Bouton hamburger fixe = position absolute + zIndex élevé + onPress
+
+- Drawer doit envelopper la navigation
+
+
+Note : focus dans React Navigation
+1️⃣ À quoi ça sert
+
+Le focus permet de savoir quand un écran devient actif à l’écran. C’est utile quand tu veux :
+
+Mettre à jour l’UI selon l’écran affiché.
+
+Charger des données uniquement quand l’utilisateur voit l’écran.
+
+Activer ou désactiver des boutons globaux (comme ton bouton hamburger).
+
+2️⃣ Exemple concret
+
+Supposons que tu as un bouton hamburger global, mais tu veux qu’il n’apparaisse pas sur les pages de login et signup.
+
+import { useState } from "react";
+import { TouchableOpacity, Text } from "react-native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
+
+function ProfilScreen() {
+  const [showMessage, setShowMessage] = useState(false);
+
+  // useFocusEffect s’exécute à chaque fois que l’écran devient actif
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log("ProfilScreen est affiché !");
+      setShowMessage(true);
+
+      return () => {
+        console.log("ProfilScreen n'est plus affiché !");
+        setShowMessage(false);
+      };
+    }, [])
+  );
+
+  return (
+    <>
+      {showMessage && <Text>Bienvenue sur Profil !</Text>}
+    </>
+  );
+}
+
+
+Explication :
+
+useFocusEffect est appelé quand l’écran devient actif.
+
+Ici, on affiche un message seulement quand l’écran est visible.
+
+Quand on quitte l’écran, le cleanup dans le return se déclenche pour masquer le message.
+
+3️⃣ Résumé
+
+Focus = écran visible pour l’utilisateur.
+
+Permet de réagir dynamiquement selon l’écran actif.
+
+Très utile pour des boutons globaux, chargement de données, analytics, etc. 
+
+-----------------------------------------------------------------------------------------------------------
+
+NavigateAndClose (Naviguer puis fermer un drawer)
+1️⃣ Définition
+
+"Navigate and Close" est un pattern courant dans les applications utilisant un drawer ou un modal :
+
+On veut naviguer vers un nouvel écran et, en même temps, fermer le drawer ou modal pour que l’utilisateur arrive directement sur le contenu cible.
+
+Dans React Native avec DrawerLayoutAndroid ou @react-navigation/drawer :
+
+Navigate : permet de changer d’écran (navigation.navigate("ScreenName"))
+
+Close : permet de fermer le drawer (drawerRef.current.closeDrawer() ou navigation.closeDrawer() si on utilise le Drawer Navigator officiel)
+
+2️⃣ Particularités
+
+Ordre important :
+
+Il faut d’abord naviguer, puis fermer le drawer, ou parfois d’abord fermer le drawer, puis naviguer, selon le comportement attendu.
+
+Si on ferme le drawer après la navigation, on évite que le drawer reste ouvert sur le nouvel écran.
+
+Accessibilité du drawer :
+
+Avec DrawerLayoutAndroid (API native Android), il faut passer une référence (ref) pour fermer le drawer.
+
+Avec @react-navigation/drawer, navigation.closeDrawer() fonctionne directement depuis l’écran ou le composant enfant.
+
+Éviter les erreurs :
+
+Si la référence n’existe pas ou que le drawer est déjà fermé, l’appel à closeDrawer() peut échouer.
+
+Vérifier avec if (drawerRef.current) avant de fermer.
+
+3️⃣ Exemple pratique avec DrawerLayoutAndroid
+
+DrawerContent.js :
+
+import React from "react";
+import { View, Text, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+const DrawerContent = ({ drawerRef }) => {
+  const navigation = useNavigation();
+
+  const navigateAndClose = (screenName) => {
+    navigation.navigate(screenName);     // 1️⃣ Naviguer vers l’écran cible
+    if (drawerRef && drawerRef.current) {
+      drawerRef.current.closeDrawer();   // 2️⃣ Fermer le drawer
+    }
+  };
+
+  return (
+    <View style={{ flex: 1, padding: 20, backgroundColor: "#222" }}>
+      <Pressable onPress={() => navigateAndClose("Profil")}>
+        <Text style={{ color: "#fff", fontSize: 18, marginVertical: 10 }}>Profil</Text>
+      </Pressable>
+
+      <Pressable onPress={() => navigateAndClose("Progression")}>
+        <Text style={{ color: "#fff", fontSize: 18, marginVertical: 10 }}>Progression</Text>
+      </Pressable>
+    </View>
+  );
+};
+
+export default DrawerContent;
+
+4️⃣ Exemple pratique avec @react-navigation/drawer
+
+Si on utilise le Drawer Navigator officiel :
+
+<Drawer.Screen name="Profil" component={Profil} />
+
+
+Dans le contenu du drawer :
+
+const navigation = useNavigation();
+
+<Pressable onPress={() => {
+  navigation.navigate("Profil");
+  navigation.closeDrawer();  // Fonction intégrée
+}}>
+  <Text>Profil</Text>
+</Pressable>
+
+
+Ici, pas besoin de ref, React Navigation gère tout.
+
+5️⃣ Avantages
+
+Expérience utilisateur fluide : l’utilisateur arrive directement sur le nouvel écran sans que le drawer reste ouvert.
+
+Peut être combiné avec un state drawerOpen pour changer l’icône du bouton hamburger en menu ou close.
+
+Fonctionne à la fois avec DrawerLayoutAndroid et le Drawer Navigator.
+
+| Point                  | DrawerLayoutAndroid                     | Drawer Navigator           |
+| ---------------------- | --------------------------------------- | -------------------------- |
+| Fermer le drawer       | `drawerRef.current.closeDrawer()`       | `navigation.closeDrawer()` |
+| Naviguer vers un écran | `navigation.navigate("ScreenName")`     | Même chose                 |
+| Utilisation combinée   | Naviguer puis fermer                    | Naviguer puis fermer       |
+| Sécurité               | Vérifier que `drawerRef.current` existe | Pas nécessaire             |
+
+
+
+Pour résumer, "Navigate and Close" est un pattern essentiel pour une navigation fluide 
+dans les apps avec drawer. Que tu utilises DrawerLayoutAndroid ou le Drawer Navigator officiel, 
+l’idée reste la même : naviguer vers l’écran cible et fermer le drawer pour une UX optimale.
+
+-----------------------------------------------------------------------------------------------------------
+
+##React Native - Choses apprises qui peuvent être utiles
+
+J'ai appris que si l'on veut mettre un élément devant un drawer (qui est devant tout le reste)
+il faut lui donner un zIndex élevé et une position absolute comme ceci:
+<TouchableOpacity
+  onPress={() => drawerRef.current.openDrawer()}
+  style={{
+    position: "absolute",
+    top: 40,
+    left: 20,
+    zIndex: 999,
+    backgroundColor: "transparent",
+  }}
+>
+  <Ionicons name="menu" size={35} color="white" />
+</TouchableOpacity>
+Cela permet de faire en sorte que le bouton hamburger soit toujours visible
+même lorsque le drawer est ouvert car sinon il serait caché derrière le drawer.
+Cela permet également de le positionner où l'on veut sur l'écran
+Autrement il faut le mettre en dehors du DrawerLayoutAndroid.
+
+
+# Retour sur React Native
+# J'ai réappris que l'arrière plan doit contenir tous les éléments de la page, sinon les éléments ne seront pas visibles 
+#Si on veut modifier un élément, il faut lui donner un style particulier et surtout le placer dans une View seule ce qui permet de mieux la maîtriser
+
+# En React Native, ce ne sont pas les éléments (Image, Text…) qui gèrent leur position.
+
+# C’est toujours la View qui les contient qui organise :
+
+# l’alignement
+
+# la direction (ligne ou colonne)
+
+# l’espacement
+
+# le centrage
+
+# Pour créer des layouts complexes, il faut souvent utiliser plusieurs View imbriquées.
