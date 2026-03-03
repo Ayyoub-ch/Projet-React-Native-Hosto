@@ -17,3 +17,9 @@ Choses faites:
 -Création de la page de Navigation
 -Création du dossier pour l'API + le fichier
 
+Choses à faire pour la prochaine fois:
+-Corriger les erreurs sur la page Expo
+-Ajouter Icone et personnalisation
+-Faire afficher la première page et essayer de se connecter 
+
+
