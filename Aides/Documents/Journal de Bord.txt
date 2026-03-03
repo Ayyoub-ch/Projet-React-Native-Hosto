@@ -1,0 +1,17 @@
+02/03:
+Période : 1 journée avant d'avoir le projet officiel
+
+Choses faites:
+-Création du dépôt GitHub
+-Création du Projet et mises à jour des dépendances
+-Récupération de la Base de Données du Projet Ap_Gestion_Patient
+
+03/03:
+Période: Début du Projet
+
+Choses faites:
+-Lecture du sujet
+-Premier essaie de mise en place de la connexion via une API Node.js afin d'avoir accès à MYSQL
+-Navigation via react-navigation dans App.js
+-Choix du nom des écrans
+

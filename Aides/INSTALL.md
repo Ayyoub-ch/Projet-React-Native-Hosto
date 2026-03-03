@@ -107,3 +107,9 @@ npx expo install react-native-screens react-native-safe-area-context
 # Installer StackNavigator
 npm install @react-navigation/native-stack
 
+
+### Si un paquet de node à des problèmes
+## Réinstallation propre
+Remove-Item -Recurse -Force node_modules (supprime de force le dossier node_modules)
+Remove-Item package-lock.json (supprime de force package-lock.json)
+npm install (réinstalle tout)

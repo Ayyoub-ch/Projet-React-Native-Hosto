@@ -1,0 +1,20 @@
+Plan pour l'application Mobile Hopital:
+
+Schéma brut de l'application:
+
+Login -> (mdp, role etc....) --> (pas besoin d'admin vu que c'est sur mobile)
+--> Adminsitratif : Gestion des patients | Gestion des séjours
+--> Infirmier --> Si Infirmier : Gestion ..
+
+Etapes :
+
+Etape Numéro 0: créer le projet et ramener les éléments nécessaires
+
+Etape Numéro 1: Faire la connexion
+
+Solutions: 
+-soit faire une API node.js et utilisez la BDD Mysql (meilleure choix)
+-soit utilisez firebase
+
+Etape Numéro 2: Configurer la page App pour la navigation
+Sous Etape 1: Mettre la navigation
