@@ -12,6 +12,8 @@ Période: Début du Projet
 Choses faites:
 -Lecture du sujet
 -Premier essaie de mise en place de la connexion via une API Node.js afin d'avoir accès à MYSQL
--Navigation via react-navigation dans App.js
+-Installation de la Navigation via react-navigation dans App.js
 -Choix du nom des écrans
+-Création de la page de Navigation
+-Création du dossier pour l'API + le fichier
 
