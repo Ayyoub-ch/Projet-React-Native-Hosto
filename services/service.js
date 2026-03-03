@@ -7,10 +7,11 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "localhost",
+  host: "192.168.1.202",
   user: "root",
   password: "",
   database: "gestion_patients",
+  port: 3306
 });
 
 db.connect((err) => {
@@ -32,5 +33,5 @@ app.post("/users", (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("Serveur lancé sur http://localhost:3000");
+  console.log("Serveur lancé sur http://192.168.1.202:3000");
 });
