@@ -1,5 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //Ecrans
 //Authentification
@@ -30,7 +30,7 @@ import Consultation_Séjours_Date from './screens/consultation_sejours_date';
 import Consultation_Séjours_Date_Début from './screens/consultation_sejours_date_debut';
 import Consultation_Séjours_Date_À_Venir from './screens/consultation_sejours_date_a_venir';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
