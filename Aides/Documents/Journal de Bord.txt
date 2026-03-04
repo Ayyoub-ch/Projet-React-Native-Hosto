@@ -23,3 +23,16 @@ Choses à faire pour la prochaine fois:
 -Faire afficher la première page et essayer de se connecter 
 
 
+04/03:
+
+Choses faites aujourd'hui:
+-Mise à jour de Expo Go 
+-Correction des erreurs liés aux installations
+-Ajout des pages dans screens afin de pouvoir visualiser l'application
+-Réussite de visionnage de la page de login
+
+Choses à faire pour la prochaine fois:
+-Etablir la connexion à la base de données 
+-Vérifier que chaque personnel : Administratif ou Infirmier peut se connecter et accéder à son espace
+-Créer les visuels des différentes pages
+
