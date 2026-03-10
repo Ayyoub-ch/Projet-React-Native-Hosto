@@ -25,6 +25,7 @@ import Modifier_Séjour from './screens/administratif/sejour/modifier_sejour';
 
 //Infirmier
 import Infirmier from './screens/infirmier/infirmier';
+import InfirmierGestion from './screens/infirmier/gestion/gestion';
 
 //Gestion
 import Gestion_Arrivées_Patients from './screens/infirmier/gestion/gestion_arrivées_patients';
@@ -107,6 +108,14 @@ export default function App() {
         {/*Écran de départ pour le service Administratif*/}
         <Stack.Screen name="infirmier" options={{ title: "Infirmier" }}>
           {(props) => <ScreenWithFooter Component={Infirmier} {...props} />}
+        </Stack.Screen>
+
+        <Stack.Screen name="infirmier_gestion" options={{ title: "Gestion des arrivées et sorties des patients" }}>
+          {(props) => <ScreenWithFooter Component={InfirmierGestion} {...props} />}
+        </Stack.Screen>
+
+        <Stack.Screen name="infirmier_consultation" options={{ title: "Consultation des patients" }}>
+          {(props) => <ScreenWithFooter Component={InfirmierConsultation} {...props} />}
         </Stack.Screen>
 
         {/*Écran pour la partie Gestion des arrivées des patients*/}

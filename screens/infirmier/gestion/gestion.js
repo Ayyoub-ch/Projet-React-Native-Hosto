@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export default function Infirmier() {
+export default function InfirmierGestion() {
   const { width } = useWindowDimensions();
   const isSmallScreen = width < 900;
 
@@ -11,16 +11,16 @@ export default function Infirmier() {
       <View style={[styles.buttonRow, isSmallScreen && styles.buttonColumn]}>
         <Pressable
           style={({ pressed }) => [styles.bigButton, pressed && styles.bigButtonPressed]}
-          onPress={() => navigation.navigate("infirmier_gestion")}
+          onPress={() => navigation.navigate("gestion_arrivées_patients")}
         >
-          <Text style={styles.bigButtonText}>Gerer les arrivées et sorties des patients</Text>
+          <Text style={styles.bigButtonText}>Gerer les arrivées des patients</Text>
         </Pressable>
 
         <Pressable
           style={({ pressed }) => [styles.bigButton, pressed && styles.bigButtonPressed]}
-          onPress={() => navigation.navigate("infirmier_consultation")}
+          onPress={() => navigation.navigate("gestion_sorties_patients")}
         >
-          <Text style={styles.bigButtonText}>Consulter les patients </Text>
+          <Text style={styles.bigButtonText}>Gerer les sorties des patients</Text>
         </Pressable>
       </View>
     </View>
