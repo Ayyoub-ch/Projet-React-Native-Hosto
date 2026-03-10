@@ -6,29 +6,29 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './screens/login';
 
 //Administratif
-import Administratif from './screens/administratif';
+import Administratif from './screens/administratif/administratif';
 
 //Patients
-import Gestion_Patients from './screens/gestion_patients';
-import Ajouter_Patient from './screens/ajouter_patient';
-import Modifier_Patient from './screens/modifier_patient';
+import Gestion_Patients from './screens/administratif/patient/gestion_patients';
+import Ajouter_Patient from './screens/administratif/patient/ajouter_patient';
+import Modifier_Patient from './screens/administratif/patient/modifier_patient';
 
 //Séjours
-import Gestion_Séjours from './screens/gestion_sejours';
-import Ajouter_Séjour from './screens/ajouter_sejour';
-import Modifier_Séjour from './screens/modifier_sejour'; 
+import Gestion_Séjours from './screens/administratif/sejour/gestion_sejours';
+import Ajouter_Séjour from './screens/administratif/sejour/ajouter_sejour';
+import Modifier_Séjour from './screens/administratif/sejour/modifier_sejour'; 
 
 //Infirmier
 import Infirmier from './screens/infirmier';
 
 //Gestion
-import Gestion_Arrivées_Patients from './screens/gestion_arrivées_patients';
-import Gestion_Sorties_Patients from './screens/gestion_sorties_patients';
+import Gestion_Arrivées_Patients from './screens/infirmier/gestion/gestion_arrivées_patients';
+import Gestion_Sorties_Patients from './screens/infirmier/gestion/gestion_sorties_patients';
 
 //Consultation
-import Consultation_Séjours_Date from './screens/consultation_sejours_date';
-import Consultation_Séjours_Date_Début from './screens/consultation_sejours_date_debut';
-import Consultation_Séjours_Date_À_Venir from './screens/consultation_sejours_date_a_venir';
+import Consultation_Séjours_Date from './screens/infirmier/consultation/consultation_sejours_date';
+import Consultation_Séjours_Date_Début from './screens/infirmier/consultation/consultation_sejours_date_debut';
+import Consultation_Séjours_Date_À_Venir from './screens/infirmier/consultation/consultation_sejours_date_a_venir';
 
 const Stack = createNativeStackNavigator();
 

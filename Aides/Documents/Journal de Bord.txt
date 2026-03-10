@@ -36,3 +36,7 @@ Choses à faire pour la prochaine fois:
 -Vérifier que chaque personnel : Administratif ou Infirmier peut se connecter et accéder à son espace
 -Créer les visuels des différentes pages
 
+10/03:
+
+Choses faites aujourd'hui:
+9h00: ajout de sossier afin de structurer les écrans
