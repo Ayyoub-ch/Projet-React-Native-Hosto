@@ -39,4 +39,250 @@ Choses à faire pour la prochaine fois:
 10/03:
 
 Choses faites aujourd'hui:
-9h00: ajout de sossier afin de structurer les écrans
+9h00: ajout de dossier afin de structurer les écrans
+
+12h20: 
+-----------------------------------------------------------------------------------------------------------
+
+Note rapide - Connexion React Native (10/03/2026)
+
+- Le bouton "Connexion" semblait ne rien faire car l'API n'etait pas joignable (`192.168.1.202:3000` injoignable).
+- J'ai verifie le reseau avec `Test-NetConnection` et confirme que le port 3000 etait ferme/non accessible.
+- J'ai ameliore `screens/login.js` avec:
+  - verification des champs vides,
+  - etat de chargement (`Connexion...`),
+  - timeout de requete (8s),
+  - alertes claires si serveur injoignable.
+- J'ai ajoute un `/login` dans `services/service.js` pour verifier email + mot de passe puis rediriger selon le role (`ROLE_ADMINISTRATIF` ou `ROLE_INFIRMIER`).
+
+    const users = await getDocs(collection(db, "users"));
+    users.forEach(doc => console.log(doc.id, doc.data()));
+
+  14h30:
+(
+  Tentatives faites:
+  - Verification de l'endpoint `POST /login` dans `services/service.js`.
+  - Ajout d'une route de test `GET /health` pour verifier si l'API repond.
+  - Test reseau avec `Test-NetConnection` et `Invoke-RestMethod`.
+  - Ajout dans `login.js` d'un timeout, d'un etat de chargement et d'alertes explicites.
+  - Passage du serveur en ecoute `0.0.0.0` pour accepter les requetes reseau.
+
+  Probleme identifie:
+  - Le message "Serveur injoignable" ne venait pas d'un bug du bouton, mais d'un probleme d'accessibilite reseau.
+  - L'URL utilisee dans l'application etait `192.168.1.202`, alors que cette IP n'etait plus l'IP active de la machine.
+  - Resultat: l'application envoyait bien la requete, mais vers une mauvaise adresse, donc pas de reponse API.
+
+  Correction retenue:
+  - Mettre une URL API valide (IP reseau active du PC ou `10.0.2.2` sur emulateur Android).
+  - Laisser `service.js` configurable (HOST/PORT/DB via variables d'environnement) pour eviter les IP en dur.
+
+  12h50 :
+
+  Changements operes sur `services/service.js`:
+  - Ajout de `bcryptjs` pour verifier le mot de passe hashé en base.
+  - Connexion MySQL alignee avec `gestion_patient` et configuration locale de la BDD.
+  - Adaptation de la route `POST /users` au schema de la table `user` (`email`, `password`, `roles`).
+  - Ajout de `parseRoles()` pour lire le JSON de `roles` (tableau ou objet).
+  - Ajout de `resolveAppRole()` pour identifier le role a renvoyer au front.
+  - Creation de `POST /login` avec:
+    - verification des champs,
+    - recherche de l'utilisateur,
+    - verification du hash (conversion `$2y$` vers `$2b$`),
+    - renvoi de `success` + `role` pour la redirection React Native.
+
+  10/03 - Resume complet des travaux realises (React Native + API Node.js)
+
+  1) Connexion et reseau
+  - Verification du comportement Expo Go (`loading ...:8081`) et distinction Metro vs API backend.
+  - Diagnostic du message `Network request failed`.
+  - Verification IP machine + port d'ecoute backend (3000) sous Windows.
+  - Correction de l'URL API front: passage de `192.168.1.203` a `192.168.1.202`.
+  - Amelioration des messages d'erreur dans `login.js` (details techniques affiches dans les alertes).
+
+  2) Authentification
+  - `POST /login` operationnel dans `services/service.js` avec verification du mot de passe hashé.
+  - Redirection front selon role:
+    - `ROLE_ADMINISTRATIF` -> espace administratif
+    - `ROLE_INFIRMIER` -> espace infirmier
+
+  3) Navigation et layout global
+  - Creation/integration d'un `Footer` React Native commun.
+  - Creation/integration d'un `Header` React Native commun.
+  - Application du layout global a tous les ecrans sauf login via wrapper dans `App.js`.
+  - Correction d'un probleme d'import duplique + ligne invalide dans `App.js`.
+
+  4) Evolution du header
+  - Ajout d'un menu hamburger (3 barres).
+  - Transformation en panneau lateral ouvrable.
+  - Deplacement du panneau de droite vers gauche sur demande.
+  - Ajustements visuels successifs (header plus haut, leger decalage vertical).
+
+  5) Evolution du footer
+  - Adaptation du design web en composant React Native.
+  - Reduction de taille progressive (plus compact).
+  - Reutilisation du contenu du footer dans la sidebar (menu lateral).
+
+  6) Ecran Administratif
+  - Refonte du style pour correspondre au design fourni (deux gros boutons).
+  - Boutons relies a:
+    - `gestion_patients`
+    - `gestion_sejours`
+  - Version responsive (ligne/colonne selon largeur d'ecran).
+
+  7) Gestion des patients (front)
+  - Refonte complete de `gestion_patients.js` en mode carte + tableau.
+  - Ajout des boutons retour/ajout.
+  - Tableau horizontal + vertical scrollable.
+  - Actions par ligne:
+    - Modifier
+    - Supprimer (confirmation)
+
+  8) API patients (backend)
+  - Ajout des endpoints:
+    - `GET /patients`
+    - `GET /patients/:id`
+    - `POST /patients`
+    - `PUT /patients/:id`
+    - `DELETE /patients/:id`
+  - Jointure avec `localite` pour afficher `ville (code_postal)`.
+
+  9) CRUD patients complet (front + BDD)
+  - `gestion_patients.js` charge les donnees depuis la BDD (`GET /patients`).
+  - Suppression connectee a la BDD (`DELETE /patients/:id`).
+  - `modifier_patient.js` branche sur `PUT /patients/:id`.
+  - `ajouter_patient.js` branche sur `POST /patients`.
+  - Rafraichissement automatique de la liste au retour ecran (`useFocusEffect`).
+
+  10) Fiabilisation suppression patient
+  - Amelioration de `DELETE /patients/:id` avec transaction SQL:
+    - suppression des sejours lies (`sejour.patient_id`)
+    - suppression du patient
+    - commit/rollback en cas d'erreur
+  - Objectif: garantir la suppression meme si le patient a des sejours associes.
+
+  11) Validation globale
+  - Verification des erreurs VS Code apres chaque serie de modifications.
+  - Aucune erreur detectee dans les fichiers modifies a la fin des iterations.
+  )
+
+  -------------------------------------------------------------------------------
+  DETAIL COMPLET DES MODIFICATIONS APPORTEES (PAR FICHIER)
+  Date: 10/03/2026
+
+  1) Authentification / Reseau
+
+  Fichier: screens/login.js
+  - Ajout d'une validation des champs email/mot de passe avant appel API.
+  - Ajout d'un etat de chargement (`isLoading`) pour eviter les doubles clics.
+  - Ajout d'un timeout reseau avec `AbortController`.
+  - Affichage d'alertes detaillees en cas d'erreur (nom + message technique).
+  - Redirection selon role apres login:
+    - ROLE_ADMINISTRATIF -> administratif
+    - ROLE_INFIRMIER -> infirmier
+
+  Fichier: services/service.js
+  - Mise en place de `POST /login`.
+  - Verification du hash mot de passe via `bcryptjs`.
+  - Normalisation du prefixe hash (`$2y$` -> `$2b$`) pour compatibilite bcrypt.
+  - Parsing robuste des roles (`parseRoles`) + mapping role app (`resolveAppRole`).
+
+
+  2) Layout global / Navigation
+
+  Fichier: App.js
+  - Creation d'un wrapper d'ecran commun pour harmoniser l'UI hors login.
+  - Integration globale du Header sur tous les ecrans (sauf login).
+  - Integration initiale du Footer, puis migration du contenu footer dans la sidebar.
+  - Nettoyage d'imports dupliques et correction d'une ligne invalide.
+
+  Fichier: screens/inc/header.js
+  - Creation d'un header personnalise avec logo + navigation.
+  - Ajout d'un menu hamburger (3 barres).
+  - Ajout d'une sidebar ouvrable/fermable avec overlay + bouton fermer.
+  - Deplacement du panneau lateral a gauche (au lieu de droite).
+  - Ajustements visuels successifs: hauteur, padding, taille du logo, taille texte.
+
+  Fichier: screens/inc/footer.js
+  - Creation d'un footer React Native adapte du design web.
+  - Reduction progressive de la taille (plus compact).
+  - Extraction de `FooterContent` reutilisable dans la sidebar du header.
+
+
+  3) Espace Administratif (menu principal)
+
+  Fichier: screens/administratif/administratif.js
+  - Refonte du style en mode "deux gros boutons".
+  - Navigation active vers:
+    - gestion_patients
+    - gestion_sejours
+  - Adaptation responsive (horizontal sur grand ecran, vertical sur petit ecran).
+
+
+  4) Module Patients - CRUD complet relie a la BDD
+
+  Fichier: services/service.js
+  - Ajout des endpoints patients:
+    - GET /patients
+    - GET /patients/:id
+    - POST /patients
+    - PUT /patients/:id
+    - DELETE /patients/:id
+  - Jointure `patient` + `localite` pour afficher ville/code postal.
+  - Fiabilisation DELETE patient avec transaction SQL:
+    - suppression des sejours lies
+    - suppression du patient
+    - rollback/commit selon erreur/succes
+
+  Fichier: screens/administratif/patient/gestion_patients.js
+  - Refonte en vue tableau (cards + actions + table scrollable).
+  - Chargement des patients depuis API (`GET /patients`).
+  - Rafraichissement automatique avec `useFocusEffect`.
+  - Suppression reliee API (`DELETE /patients/:id`) + mise a jour immediate UI.
+  - Ajout scroll horizontal + vertical du tableau.
+
+  Fichier: screens/administratif/patient/ajouter_patient.js
+  - Creation d'un vrai formulaire d'ajout.
+  - Envoi API vers `POST /patients`.
+  - Retour ecran liste apres succes.
+
+  Fichier: screens/administratif/patient/modifier_patient.js
+  - Creation d'un vrai formulaire de modification pre-rempli.
+  - Envoi API vers `PUT /patients/:id`.
+  - Retour ecran liste apres succes.
+
+
+  5) Module Sejours - CRUD complet relie a la BDD
+
+  Fichier: services/service.js
+  - Ajout des endpoints sejours:
+    - GET /sejours
+    - POST /sejours
+    - PUT /sejours/:id
+    - DELETE /sejours/:id
+  - Jointures pour enrichir la liste:
+    - sejour + patient (nom/prenom)
+    - sejour + chambre (id/etage)
+
+  Fichier: screens/administratif/sejour/gestion_sejours.js
+  - Adaptation complete du design web (cartes + tableau + actions).
+  - Chargement depuis API (`GET /sejours`).
+  - Suppression reliee API (`DELETE /sejours/:id`).
+  - Passage des donnees au formulaire de modification.
+  - Tableau scrollable horizontal + vertical.
+
+  Fichier: screens/administratif/sejour/ajouter_sejour.js
+  - Creation formulaire d'ajout sejour.
+  - Connexion API `POST /sejours`.
+
+  Fichier: screens/administratif/sejour/modifier_sejour.js
+  - Creation formulaire de modification sejour pre-rempli.
+  - Connexion API `PUT /sejours/:id`.
+
+
+  6) Stabilisation et verification
+  - Verification des erreurs VS Code apres chaque lot de modifications.
+  - Correction immediate des regressions detectees (imports/structure/layout).
+  - Validation finale: aucun probleme de syntaxe detecte dans les fichiers modifies.
+
+    Choses faites aujourd'hui :
+  -Ajouts des pages pour la Partie Administratif (patient et séjour)

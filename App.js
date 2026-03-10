@@ -1,7 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { View, StyleSheet } from 'react-native';
 
 //Ecrans
+
+//Pied de Page et Entête de page
+import Header from './screens/inc/header';
+
 //Authentification
 import Login from './screens/login';
 
@@ -19,7 +24,7 @@ import Ajouter_Séjour from './screens/administratif/sejour/ajouter_sejour';
 import Modifier_Séjour from './screens/administratif/sejour/modifier_sejour'; 
 
 //Infirmier
-import Infirmier from './screens/infirmier';
+import Infirmier from './screens/infirmier/infirmier';
 
 //Gestion
 import Gestion_Arrivées_Patients from './screens/infirmier/gestion/gestion_arrivées_patients';
@@ -30,7 +35,19 @@ import Consultation_Séjours_Date from './screens/infirmier/consultation/consult
 import Consultation_Séjours_Date_Début from './screens/infirmier/consultation/consultation_sejours_date_debut';
 import Consultation_Séjours_Date_À_Venir from './screens/infirmier/consultation/consultation_sejours_date_a_venir';
 
+
 const Stack = createNativeStackNavigator();
+
+function ScreenWithFooter({ Component, ...props }) {
+  return (
+    <View style={styles.pageContainer}>
+      <Header navigation={props.navigation} currentRouteName={props.route?.name} />
+      <View style={styles.screenContent}>
+        <Component {...props} />
+      </View>
+    </View>
+  );
+}
 
 export default function App() {
   return (
@@ -49,101 +66,85 @@ export default function App() {
         {/*Écrans pour le service Administratif*/}
         
         {/*Écran de départ pour le service Administratif*/}
-        <Stack.Screen 
-          name="administratif"
-          component={Administratif}
-          options={{ title: "Administratif" }}
-        />
+        <Stack.Screen name="administratif" options={{ title: "Administratif" }}>
+          {(props) => <ScreenWithFooter Component={Administratif} {...props} />}
+        </Stack.Screen>
 
         {/*Écran de la partie Gestion des Patients*/}
-        <Stack.Screen 
-          name="gestion_patients"
-          component={Gestion_Patients}
-          options={{ title: "Gestion des Patients" }}
-        />
+        <Stack.Screen name="gestion_patients" options={{ title: "Gestion des Patients" }}>
+          {(props) => <ScreenWithFooter Component={Gestion_Patients} {...props} />}
+        </Stack.Screen>
 
         {/*Écran de la partie Ajouter un patient*/}
-        <Stack.Screen 
-          name="ajouter_patient"
-          component={Ajouter_Patient}
-          options={{ title: "Ajouter un patient" }}
-        />
+        <Stack.Screen name="ajouter_patient" options={{ title: "Ajouter un patient" }}>
+          {(props) => <ScreenWithFooter Component={Ajouter_Patient} {...props} />}
+        </Stack.Screen>
 
         {/*Écran de la partie Modifier un patient*/}
-        <Stack.Screen 
-          name="modifier_patient"
-          component={Modifier_Patient}
-          options={{ title: "Modifier un patient" }}
-        />
+        <Stack.Screen name="modifier_patient" options={{ title: "Modifier un patient" }}>
+          {(props) => <ScreenWithFooter Component={Modifier_Patient} {...props} />}
+        </Stack.Screen>
 
 
         {/*Écran de la partie Gestion des Séjours*/}
-        <Stack.Screen 
-          name="gestion_sejours"
-          component={Gestion_Séjours}
-          options={{ title: "Gestion des Séjours" }}
-        />
+        <Stack.Screen name="gestion_sejours" options={{ title: "Gestion des Séjours" }}>
+          {(props) => <ScreenWithFooter Component={Gestion_Séjours} {...props} />}
+        </Stack.Screen>
 
         {/*Écran de la partie Ajouter un séjour*/}
-        <Stack.Screen 
-          name="ajouter_sejour"
-          component={Ajouter_Séjour}
-          options={{ title: "Ajouter un séjour" }}
-        />
+        <Stack.Screen name="ajouter_sejour" options={{ title: "Ajouter un séjour" }}>
+          {(props) => <ScreenWithFooter Component={Ajouter_Séjour} {...props} />}
+        </Stack.Screen>
         
         {/*Écran de la partie Modifier un séjour*/}
-        <Stack.Screen 
-          name="modifier_sejour"
-          component={Modifier_Séjour}
-          options={{ title: "Modifier un séjour" }}
-        />
+        <Stack.Screen name="modifier_sejour" options={{ title: "Modifier un séjour" }}>
+          {(props) => <ScreenWithFooter Component={Modifier_Séjour} {...props} />}
+        </Stack.Screen>
 
         
         {/*Écrans de la partie Infirmier*/}
 
         {/*Écran de départ pour le service Administratif*/}
-        <Stack.Screen 
-          name="infirmier"
-          component={Infirmier}
-          options={{ title: "Infirmier" }}
-        />
+        <Stack.Screen name="infirmier" options={{ title: "Infirmier" }}>
+          {(props) => <ScreenWithFooter Component={Infirmier} {...props} />}
+        </Stack.Screen>
 
         {/*Écran pour la partie Gestion des arrivées des patients*/}
-        <Stack.Screen 
-          name="gestion_arrivées_patients"
-          component={Gestion_Arrivées_Patients}
-          options={{ title: "Gestion des arrivées des patients" }}
-        />
+        <Stack.Screen name="gestion_arrivées_patients" options={{ title: "Gestion des arrivées des patients" }}>
+          {(props) => <ScreenWithFooter Component={Gestion_Arrivées_Patients} {...props} />}
+        </Stack.Screen>
 
         {/*Écran pour la partie Gestion des sorties des patients*/}
-        <Stack.Screen 
-          name="gestion_sorties_patients"
-          component={Gestion_Sorties_Patients}
-          options={{ title: "Gestion des sorties des patients" }}
-        />
+        <Stack.Screen name="gestion_sorties_patients" options={{ title: "Gestion des sorties des patients" }}>
+          {(props) => <ScreenWithFooter Component={Gestion_Sorties_Patients} {...props} />}
+        </Stack.Screen>
 
         {/*Écran pour la partie Consultation des séjours à une date donnée*/}
-        <Stack.Screen 
-          name="consultation_sejours_date"
-          component={Consultation_Séjours_Date}
-          options={{ title: "Consultation des séjours à une date donnée" }}
-        />
+        <Stack.Screen name="consultation_sejours_date" options={{ title: "Consultation des séjours à une date donnée" }}>
+          {(props) => <ScreenWithFooter Component={Consultation_Séjours_Date} {...props} />}
+        </Stack.Screen>
 
         {/*Écran pour la partie Consultation des séjours commençant à une date donnée*/}
-        <Stack.Screen 
-          name="consultation_sejours_date_debut"
-          component={Consultation_Séjours_Date_Début}
-          options={{ title: "Consultation des séjours commençant à une date donnée" }}
-        />
+        <Stack.Screen name="consultation_sejours_date_debut" options={{ title: "Consultation des séjours commençant à une date donnée" }}>
+          {(props) => <ScreenWithFooter Component={Consultation_Séjours_Date_Début} {...props} />}
+        </Stack.Screen>
 
         {/*Écran pour la partie Consultation des séjours à venir*/}
-        <Stack.Screen 
-          name="consultation_sejours_date_a_venir"
-          component={Consultation_Séjours_Date_À_Venir}
-          options={{ title: "Consultation des séjours à venir" }}
-        />
+        <Stack.Screen name="consultation_sejours_date_a_venir" options={{ title: "Consultation des séjours à venir" }}>
+          {(props) => <ScreenWithFooter Component={Consultation_Séjours_Date_À_Venir} {...props} />}
+        </Stack.Screen>
 
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  pageContainer: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  screenContent: {
+    flex: 1,
+  },
+});
