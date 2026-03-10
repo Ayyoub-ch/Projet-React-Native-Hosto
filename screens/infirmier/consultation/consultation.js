@@ -1,6 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, useWindowDimensions, Pressable } from "react-native";
 
-export default function InfirmierConsultation() {
+
+
+export default function InfirmierConsultation({ navigation }) {
   const { width } = useWindowDimensions();
   const isSmallScreen = width < 900;
 

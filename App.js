@@ -26,6 +26,7 @@ import Modifier_Séjour from './screens/administratif/sejour/modifier_sejour';
 //Infirmier
 import Infirmier from './screens/infirmier/infirmier';
 import InfirmierGestion from './screens/infirmier/gestion/gestion';
+import InfirmierConsultation from './screens/infirmier/consultation/consultation';
 
 //Gestion
 import Gestion_Arrivées_Patients from './screens/infirmier/gestion/gestion_arrivées_patients';

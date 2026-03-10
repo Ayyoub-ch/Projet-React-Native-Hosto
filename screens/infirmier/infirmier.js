@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
+import { ScrollView ,View, Text, StyleSheet, Pressable, useWindowDimensions } from "react-native";
 
-export default function Infirmier() {
+export default function Infirmier({ navigation }) {
   const { width } = useWindowDimensions();
   const isSmallScreen = width < 900;
 
