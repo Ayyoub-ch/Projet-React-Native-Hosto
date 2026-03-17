@@ -292,3 +292,19 @@ Note rapide - Connexion React Native (10/03/2026)
 
 Tâches à continuer:
 - ajout des différentes pages
+
+Tâches faites aujourd'hui:
+- Ajout des différentes pages de la partie Infirmier :
+  - detail des patients
+  - detail des sejours
+  - partie consultation
+  - partie gestion (final et vérification)
+- Ajout de l'image du logo
+- Ajout du nom de l'appli sur Expo Go
+- Changement d'adresse IP (car elle a encore changée)
+- Petite rectification du style
+
+Choses à faire :
+- Faire la documentation
+- Savoir expliquer et COMPRENDRE le code
+- Faire un schéma si possible

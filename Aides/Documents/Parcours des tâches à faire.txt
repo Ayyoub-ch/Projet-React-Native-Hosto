@@ -18,3 +18,12 @@ Solutions:
 
 Etape Numéro 2: Configurer la page App pour la navigation
 Sous Etape 1: Mettre la navigation
+
+Etape Numéro 3:
+Créer les pages
+
+Etape Numéro 4:
+Vérifier le code et l'appli générale
+
+Etape Numéro 5:
+Créer la documentation
