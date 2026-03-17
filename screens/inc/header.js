@@ -14,11 +14,15 @@ const ADMIN_ROUTES = [
 
 const INFIRMIER_ROUTES = [
 	"infirmier",
+	"infirmier_gestion",
 	"gestion_arrivées_patients",
 	"gestion_sorties_patients",
+	"infirmier_consultation",
 	"consultation_sejours_date",
 	"consultation_sejours_date_debut",
 	"consultation_sejours_date_a_venir",
+	"detail_patient",
+	"detail_sejour",
 ];
 
 function HeaderLink({ label, onPress }) {
@@ -44,8 +48,8 @@ export default function Header({ navigation, currentRouteName }) {
 
 	if (isInfirmierSection) {
 		links.push({ label: "Infirmier", route: "infirmier" });
-		links.push({ label: "Gestion", route: "gestion_arrivées_patients" });
-		links.push({ label: "Consultation", route: "consultation_sejours_date" });
+		links.push({ label: "Gestion", route: "infirmier_gestion" });
+		links.push({ label: "Consultation", route: "infirmier_consultation" });
 	}
 
 	const goTo = (route) => {
@@ -67,7 +71,7 @@ export default function Header({ navigation, currentRouteName }) {
 						style={styles.logoContainer}
 						onPress={() => navigation.navigate(isInfirmierSection ? "infirmier" : "administratif")}
 					>
-						<Image source={require("../../assets/icon.png")} style={styles.logoImage} resizeMode="contain" />
+						<Image source={require("../../assets/logo.png")} style={styles.logoImage} resizeMode="contain" />
 						<Text style={styles.logoText}>Hopital</Text>
 					</Pressable>
 				</View>
