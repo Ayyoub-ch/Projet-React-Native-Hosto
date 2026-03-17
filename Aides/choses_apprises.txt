@@ -688,3 +688,51 @@ Autrement il faut le mettre en dehors du DrawerLayoutAndroid.
 on fait :
 
 npx expo start --tunnel --reset-cache
+
+
+### Point sur les erreurs possibles:
+
+TypeError: Network request failed
+
+# Effet 
+
+L'appli n’arrive pas à contacter le serveur
+
+# Causes Probables
+
+- Mauvaise IP
+- Serveur non lancé
+- Téléphone et PC n'étant pas sur le même réseau
+
+# Solutions
+
+1. Utiliser l’IP du PC et pas localhost
+
+❌ Mauvais :
+
+fetch("http://localhost:3000/login")
+
+✔️ Correct :
+
+fetch("http://192.168.1.203:3000/login")
+
+
+2. Vérifier que le serveur tourne avec la CommandError
+
+node services/service.js
+
+Puis vérifier s'il y a un message indiquant que c'est connecté 
+Par exemple:
+
+PS C:\Users\Chetouani\Documents\Projet-React-Native-Hosto\services> node service.js
+Serveur lancé sur le port 3000 (0.0.0.0)
+Connecté à MySQL
+
+3. Vérifier que les deux appareils soient sur le même réseau
+
+Vérifie le WIFI des deux appareils:
+- Portable : Wifi -> Infos du réseau connecté -> IP
+- PC : CMD -> ipconfig | ifconfig | ip a    en fonction de l'OS
+
+Point TRES IMPORTANT:
+ Toujours vérifier l'IP dans chaque page affichant Erreur : Network request failed

@@ -286,3 +286,9 @@ Note rapide - Connexion React Native (10/03/2026)
 
     Choses faites aujourd'hui :
   -Ajouts des pages pour la Partie Administratif (patient et séjour)
+
+
+17/03:
+
+Tâches à continuer:
+- ajout des différentes pages

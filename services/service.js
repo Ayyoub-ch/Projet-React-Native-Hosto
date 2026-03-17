@@ -456,7 +456,6 @@ app.delete("/sejours/:id", (req, res) => {
 
 //Partie Infirmier
 
-app.
 
 app.listen(3000, "0.0.0.0", () => {
   console.log("Serveur lancé sur le port 3000 (0.0.0.0)");

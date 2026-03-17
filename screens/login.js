@@ -24,7 +24,7 @@ export default function Login({ navigation }) {
     const timeoutId = setTimeout(() => controller.abort(), 20000 );
 
     try {
-      const response = await fetch("http://192.168.1.202:3000/login", {
+      const response = await fetch("http://192.168.1.203:3000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

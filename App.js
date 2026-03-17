@@ -27,6 +27,8 @@ import Modifier_Séjour from './screens/administratif/sejour/modifier_sejour';
 import Infirmier from './screens/infirmier/infirmier';
 import InfirmierGestion from './screens/infirmier/gestion/gestion';
 import InfirmierConsultation from './screens/infirmier/consultation/consultation';
+import Detail_Patient from './screens/infirmier/gestion/detail_patient';
+import Detail_Sejour from './screens/infirmier/gestion/detail_sejour';
 
 //Gestion
 import Gestion_Arrivées_Patients from './screens/infirmier/gestion/gestion_arrivées_patients';
@@ -122,6 +124,14 @@ export default function App() {
         {/*Écran pour la partie Gestion des arrivées des patients*/}
         <Stack.Screen name="gestion_arrivées_patients" options={{ title: "Gestion des arrivées des patients" }}>
           {(props) => <ScreenWithFooter Component={Gestion_Arrivées_Patients} {...props} />}
+        </Stack.Screen>
+
+        <Stack.Screen name="detail_patient" options={{ title: "Detail du patient" }}>
+          {(props) => <ScreenWithFooter Component={Detail_Patient} {...props} />}
+        </Stack.Screen>
+
+        <Stack.Screen name="detail_sejour" options={{ title: "Detail du sejour" }}>
+          {(props) => <ScreenWithFooter Component={Detail_Sejour} {...props} />}
         </Stack.Screen>
 
         {/*Écran pour la partie Gestion des sorties des patients*/}
