@@ -1,0 +1,10 @@
+Etapes pour la doc:
+(but: faire en sorte qu'un développeur n'ayant pas besoin du contexte puisse comprendre tout)
+
+-Expliquer la structure de l'appli (via le schéma)
+-Expliquer la Base de Données
+-Expliquer l'API
+-Expliquer l'Application
+	- Structure des pages (chaque page)
+	-CSS
+	-Liaison avec l'API
