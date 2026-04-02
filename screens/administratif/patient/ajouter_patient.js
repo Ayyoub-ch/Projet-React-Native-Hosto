@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, Text, StyleSheet, TextInput, Pressable, Alert } from "react-native";
 
-const API_BASE_URL = "http://192.168.1.203:3000";
+const API_BASE_URL = "http://192.168.1.112:3000";
 
 export default function Ajouter_Patient({ navigation }) {
   const [nom, setNom] = useState("");
