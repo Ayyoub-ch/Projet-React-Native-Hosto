@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "React-Native-Hosto",
-    "slug": "React-Native-Hosto",
+    "name": "Gestion Hopital Mobile",
+    "slug": "Gestion Hopital Mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash-icon.png",
