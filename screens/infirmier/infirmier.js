@@ -20,7 +20,7 @@ export default function Infirmier({ navigation }) {
           style={({ pressed }) => [styles.bigButton, pressed && styles.bigButtonPressed]}
           onPress={() => navigation.navigate("infirmier_consultation")}
         >
-          <Text style={styles.bigButtonText}>Consulter les patients </Text>
+          <Text style={styles.bigButtonText}>Consulter les séjours </Text>
         </Pressable>
       </View>
     </View>

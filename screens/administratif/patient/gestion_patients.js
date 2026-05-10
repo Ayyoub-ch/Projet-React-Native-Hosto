@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
-const API_BASE_URL = "http://192.168.1.112:3000";
+const API_BASE_URL = "http://192.168.1.52:3000";
 
 export default function Gestion_Patients({ navigation }) {
   const [patients, setPatients] = useState([]);
