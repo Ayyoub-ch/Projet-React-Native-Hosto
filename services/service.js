@@ -8,9 +8,9 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "4170.s5.nuage-peda.fr",
-  user: "login4170",
-  password: "SChESdpPlSnKCXp",
+  host: "localhost",
+  user: "root",
+  password: "",
   database: "gestion_patient",
   port: 3306
 });
